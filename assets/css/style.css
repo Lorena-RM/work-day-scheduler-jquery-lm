@@ -63,6 +63,7 @@ textarea {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
+  padding: 20px 30px;
 }
 
 .saveBtn i:hover {
@@ -72,4 +73,9 @@ textarea {
 
 .lead {
   color: #6166ff;
+}
+
+.input-group-text{
+  padding: 10px 40px;
+  
 }
