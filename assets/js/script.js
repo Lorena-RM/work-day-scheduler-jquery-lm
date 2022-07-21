@@ -16,7 +16,7 @@ const pm4 = $("#hour-16");
 const pm5 = $("#hour-17");
 
 const saveButtonEl = $(".saveBtn");
-let userTaskInput = $("<textarea>");
+const savedLocalStorage = $("#localStorageAlert");
 
 //declare current hour of the day (military time) & localstorage
 let now = moment().hours(); 
@@ -155,6 +155,9 @@ saveButtonEl.on("click", function () {
     var hour = $(this).parent($("div")).siblings(".form-control").attr("id");
     //setting local storages using 2 vars from above
     localStorage.setItem ( hour, userTask);
+    //let user know information was saved 
+    savedLocalStorage.text("Appointment Added to Local Storage ✔️");
+
     //calling function
     renderMessage();
 });
