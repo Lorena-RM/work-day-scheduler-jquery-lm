@@ -1,4 +1,4 @@
-//time zone and date
+//using moment.js to show date
 currentTimeDate = moment().format("dddd, MMMM Do YYYY");
 $("#currentDay").text(currentTimeDate);
 
@@ -15,8 +15,12 @@ const pm3 = $("#hour-15");
 const pm4 = $("#hour-16");
 const pm5 = $("#hour-17");
 
-//declare current hour of the day (military time)
+const saveButtonEl = $(".saveBtn");
+let userTaskInput = $("<textarea>");
+
+//declare current hour of the day (military time) & localstorage
 let now = moment().hours(); 
+
 
 //creating my functions for the colors that represent past present or future
 function time7 (time) {
@@ -128,7 +132,8 @@ function time5 (time) {
         pm5.addClass('past');
     }
 }
-//calling times
+
+//calling times to show function in action
 time7 (7);
 time8 (8);
 time9 (9);
@@ -141,5 +146,35 @@ time3 (15);
 time4 (16);
 time5 (17);
 
-button.addEventListener("click" )
 
+saveButtonEl.on("click", function () {
+    //userTask is the value of text that is inputed into the text area
+    //since parents are nested-went back one parent that shared siblings to target correct parent 
+    var userTask = $(this).parent($("div")).siblings(".form-control").val().trim();
+    //same thing but targeting the hour of where the text was inputed
+    var hour = $(this).parent($("div")).siblings(".form-control").attr("id");
+    //setting local storages using 2 vars from above
+    localStorage.setItem ( hour, userTask);
+    //calling function
+    renderMessage();
+});
+
+
+function renderMessage() {
+    //adds text to the item corresponding to the hour
+    $("#hour-7").text(localStorage.getItem("hour-7"));
+    $("#hour-8").text(localStorage.getItem("hour-8"));
+    $("#hour-9").text(localStorage.getItem("hour-9"));
+    $("#hour-10").text(localStorage.getItem("hour-10"));
+    $("#hour-11").text(localStorage.getItem("hour-11"));
+    $("#hour-12").text(localStorage.getItem("hour-12"));
+    $("#hour-13").text(localStorage.getItem("hour-13"));
+    $("#hour-14").text(localStorage.getItem("hour-14"));
+    $("#hour-15").text(localStorage.getItem("hour-15"));
+    $("#hour-16").text(localStorage.getItem("hour-16"));
+    $("#hour-17").text(localStorage.getItem("hour-17"));
+
+};
+
+//renders message to appear when reloading browser again
+renderMessage();
